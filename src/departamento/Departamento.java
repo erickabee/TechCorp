@@ -1,0 +1,70 @@
+package departamento;
+
+import br.techcorp.funcionario.Funcionario;
+
+public class Departamento {
+    private String codigo;
+    private String nome;
+    private Funcionario[] funcionarios;
+    private int index;
+
+    public Departamento(int n,String codigo, String nome, int[]funcionarios){
+        this.codigo=codigo;
+        this.nome=nome;
+        this.funcionarios=new Funcionario[5];
+    }
+
+    public void adicionarFuncionario(Funcionario f){
+        if (index < funcionarios.length && f.isAtivo()){
+            funcionarios[index++]=f;
+        }
+    }
+
+    public double calcularFolhaTotalLiquida(){
+        double total = 0;
+        for (int i = 0; i < index; i++) {
+            if (funcionarios[i].isAtivo()){
+                total += funcionarios[i].calcularSalarioLiquido();
+            }
+        }
+        return total;
+    }
+
+    public int getTotalFuncionariosAtivos(){
+        int total = 0;
+
+        for (int i = 0; i < index ; i++) {
+            if (funcionarios[i].isAtivo()){
+                total++;
+            }
+        }
+        return total;
+    }
+    public Funcionario buscarFuncionario(String matricula){
+        for (int i = 0; i <index ; i++) {
+            if (funcionarios[i].getMatricula().equalsIgnoreCase(matricula)){
+                return funcionarios[i];
+            }
+        }
+        return null;
+    }
+
+    public void removerFuncionarios(String matricula){
+        Funcionario aux = buscarFuncionario(matricula);
+        if (aux != null){
+            aux.desligar();
+        }
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+}

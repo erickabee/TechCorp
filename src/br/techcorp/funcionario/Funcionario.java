@@ -15,6 +15,29 @@ public class Funcionario {
         this.salarioBase = salarioBase;
     }
 
+    public double calcularSalarioLiquido(){
+        double salario = salarioBase + salarioBase * percentualBonus / 100;
+        return salario* 0.85;
+    }
+
+    public void definirBonus(double percentual){
+        if (percentual>0){
+            percentualBonus = percentual;
+        }
+    }
+    public void desligar(){
+        ativo = false;
+        percentualBonus = 0;
+    }
+
+    public boolean isAtivo (){
+        return ativo;
+    }
+
+    public void aplicarAumento(double percentual){
+        salarioBase *=(1 + percentual / 100);
+    }
+
     public String getMatricula() {
         return matricula;
     }
@@ -33,24 +56,5 @@ public class Funcionario {
 
     public void setCargo(String cargo) {
         this.cargo = cargo;
-    }
-
-
-    public void definirBonus(double percentual){
-        if (percentual>0){
-            percentualBonus = percentual;
-        }
-    }
-    public void desligar(){
-        ativo = false;
-        percentualBonus = 0;
-    }
-
-    public boolean isAtivo (){
-        return ativo;
-    }
-
-    public void aplicarAumento(double percentual){
-        salarioBase *=(1 + percentual / 100);
     }
 }
