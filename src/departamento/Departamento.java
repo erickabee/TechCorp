@@ -2,16 +2,18 @@ package departamento;
 
 import br.techcorp.funcionario.Funcionario;
 
+import java.text.DecimalFormat;
+
 public class Departamento {
     private String codigo;
     private String nome;
     private Funcionario[] funcionarios;
     private int index;
 
-    public Departamento(int n,String codigo, String nome, int[]funcionarios){
+    public Departamento(String codigo, String nome){
         this.codigo=codigo;
         this.nome=nome;
-        this.funcionarios=new Funcionario[5];
+        this.funcionarios = new Funcionario[5];
     }
 
     public void adicionarFuncionario(Funcionario f){
@@ -54,6 +56,15 @@ public class Departamento {
         if (aux != null){
             aux.desligar();
         }
+    }
+
+    public String exibirRelatorio(){
+        DecimalFormat df = new DecimalFormat("#,##0.00");
+        String aux = "";
+        aux += "Departamento: " + nome + "\n";
+        aux += "Total de funcionarios ativos: "+ getTotalFuncionariosAtivos() + "\n";
+        aux += "Folha de pagamento: " + df.format(calcularFolhaTotalLiquida()) + "\n";
+        return aux;
     }
 
     public String getCodigo() {
